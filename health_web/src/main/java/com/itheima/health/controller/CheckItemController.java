@@ -2,6 +2,8 @@ package com.itheima.health.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.itheima.health.constant.MessageConstant;
+import com.itheima.health.entity.PageResult;
+import com.itheima.health.entity.QueryPageBean;
 import com.itheima.health.entity.Result;
 import com.itheima.health.pojo.CheckItem;
 import com.itheima.health.service.CheckItemService;
@@ -34,10 +36,19 @@ public class CheckItemController {
         CheckItem checkItem = checkItemService.findById(id);
         return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS,checkItem);
     }
+    @PostMapping("/findPage")
+    public Result findPage(@RequestBody QueryPageBean queryPageBean){
+        PageResult<CheckItem> pageResult = checkItemService.findPage(queryPageBean);
+        return new Result(true,MessageConstant.QUERY_CHECKITEM_SUCCESS,pageResult);
+    }
     @PostMapping("/update")
     public Result update(@RequestBody CheckItem checkItem){
         checkItemService.update(checkItem);
         return new Result(true, MessageConstant.EDIT_CHECKITEM_SUCCESS);
     }
-
+    @PostMapping("/deleteById")
+    public Result deleteById(int id){
+        checkItemService.deleteById(id);
+        return new Result(true,MessageConstant.DELETE_CHECKITEM_SUCCESS);
+    }
 }

@@ -15,6 +15,7 @@
         <property name="dataSource" ref="dataSource"/>
     <!-- 别名扫包   -->
         <property name="typeAliasesPackage" value="com.itheima.health.pojo"/>
+        <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
     </bean>
 <!-- dao接口扫包 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

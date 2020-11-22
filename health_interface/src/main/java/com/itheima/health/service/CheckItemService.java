@@ -1,5 +1,6 @@
 package com.itheima.health.service;
 
+import com.itheima.health.Exception.MyException;
 import com.itheima.health.entity.PageResult;
 import com.itheima.health.entity.QueryPageBean;
 import com.itheima.health.pojo.CheckItem;
@@ -18,5 +19,9 @@ public interface CheckItemService {
 
     CheckItem findById(int id);
 
+    PageResult<CheckItem> findPage(QueryPageBean queryPageBean);
+
     void update(CheckItem checkItem);
+
+    void deleteById(int id)throws MyException;
 }
