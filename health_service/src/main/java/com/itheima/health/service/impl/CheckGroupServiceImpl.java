@@ -71,7 +71,7 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(int id)throws MyException {
         int count = checkGroupDao.findCountByCheckGroupId(id);
         if (count>0){
             throw new MyException("被套餐使用  无法删除");
