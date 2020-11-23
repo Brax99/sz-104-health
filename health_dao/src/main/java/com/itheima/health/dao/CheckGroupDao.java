@@ -15,6 +15,7 @@ import java.util.List;
 public interface CheckGroupDao {
     void add(CheckGroup checkGroup);
 
+    //参数有两个 类型都为int  需要加@Param注释取别名  不然分不清传入的参数
     void addCheckGroupCheckItem(@Param("checkGroupId") Integer checkGroupId, @Param("checkitemId")Integer checkitemId);
 
     Page<CheckGroup> findByCondition(String queryString);

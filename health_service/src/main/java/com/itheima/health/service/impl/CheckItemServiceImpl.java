@@ -43,7 +43,7 @@ public class CheckItemServiceImpl implements CheckItemService {
 
     @Override
     public PageResult<CheckItem> findPage(QueryPageBean queryPageBean) {
-        //Mapper接口方式的调用 让其分页查询
+        //Mapper接口方式的调用 让其帮我我们进行分页查询
         PageHelper.startPage(queryPageBean.getCurrentPage(),queryPageBean.getPageSize());
         //判断查询条件是否为空 不为空则拼接百分号
         if (!StringUtils.isEmpty(queryPageBean.getQueryString())){
