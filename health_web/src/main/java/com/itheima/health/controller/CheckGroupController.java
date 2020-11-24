@@ -64,4 +64,9 @@ public class CheckGroupController {
         //返回删除信息
         return new Result(true,MessageConstant.DELETE_CHECKGROUP_SUCCESS);
     }
+    @GetMapping("/findAll")
+    public Result findAll(){
+        List<CheckGroup> all = checkGroupService.findAll();
+        return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS,all);
+    }
 }
