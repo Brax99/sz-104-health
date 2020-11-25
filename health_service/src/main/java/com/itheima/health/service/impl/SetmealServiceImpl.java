@@ -10,6 +10,7 @@ import com.itheima.health.entity.QueryPageBean;
 import com.itheima.health.pojo.Setmeal;
 import com.itheima.health.service.SetmealService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class SetmealServiceImpl implements SetmealService {
     @Autowired
     private SetmealDao setmealDao;
     @Override
+    @Transactional
     public void add(Setmeal setmeal, Integer[] checkgroupIds) {
         //添加套餐信息
         setmealDao.add(setmeal);
@@ -66,6 +68,7 @@ public class SetmealServiceImpl implements SetmealService {
     }
 
     @Override
+    @Transactional
     public void update(Setmeal setmeal, Integer[] checkgroupIds) {
         //首先更新套餐信息
         setmealDao.update(setmeal);
@@ -84,6 +87,7 @@ public class SetmealServiceImpl implements SetmealService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int id)throws MyException {
         //判断套餐是否被订单关联（调用dao的方法查询）
         int count = setmealDao.findOrderCountBySetmealId(id);

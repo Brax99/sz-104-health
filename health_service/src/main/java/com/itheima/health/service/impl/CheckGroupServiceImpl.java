@@ -85,6 +85,7 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int id)throws MyException {
         //判断是否被套餐使用
         int count = checkGroupDao.findCountByCheckGroupId(id);
