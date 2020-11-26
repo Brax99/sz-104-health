@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author mao
@@ -45,6 +46,35 @@ public class OrderSettingServiceImpl implements OrderSettingService {
                     orderSettingDao.add(orderSetting);
                 }
             }
+        }
+    }
+
+    @Override
+    public List<Map<String, Integer>> getDataByMonth(String month) {
+        //调用方法进行模糊查询
+        month+="%";
+        //返回查询结果
+        return orderSettingDao.getDataByMonth(month);
+    }
+
+    @Override
+    public void editNumberByDate(OrderSetting orderSetting) throws MyException {
+        //拿到日期
+        Date orderDate = orderSetting.getOrderDate();
+        //通过日期判断数据库是否有该数据（为什么用日期  因为日期不可重复）
+        OrderSetting order= orderSettingDao.findByOrderDate(orderDate);
+        //判断查询的数据是否为空  不为空就是有该数据
+        if (order !=null) {
+            //如果有就做修改信息操作  修改要判断时预约最大人数是否小于已预约人数
+            if (orderSetting.getNumber()<order.getReservations()){
+                //小于  要报错 声明异常（这里声明了接口也要声明）
+                throw new MyException("最大预约人数小于已预约人数 不符合要求");
+            }
+            //来到这  说明最大预约人数大于已预约人数 可以进行修改
+            orderSettingDao.update(orderSetting);
+        }else {
+            //数据库没有该数据 进行添加操作
+            orderSettingDao.add(orderSetting);
         }
     }
 }

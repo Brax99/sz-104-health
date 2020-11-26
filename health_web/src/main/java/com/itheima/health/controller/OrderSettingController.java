@@ -6,16 +6,14 @@ import com.itheima.health.entity.Result;
 import com.itheima.health.pojo.OrderSetting;
 import com.itheima.health.service.OrderSettingService;
 import com.itheima.health.utils.POIUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author mao
@@ -58,5 +56,22 @@ public class OrderSettingController {
             e.printStackTrace();
             return new Result(false, MessageConstant.IMPORT_ORDERSETTING_FAIL);
         }
+    }
+    //数据回显 日历展示
+    @GetMapping("/getDataByMonth")
+    public Result getDataByMonth(String month){
+        //通过前端传来的数据格式年-月  用string接收 调用业务层方法查询
+        //前端要求的数据格式List<Map<String,Integer>>
+        List<Map<String,Integer>> monthData = orderSettingService.getDataByMonth(month);
+        //封装查询结果和查询信息 返回
+        return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,monthData);
+    }
+    //修改预约设置
+    @PostMapping("/editNumberByDate")
+    public Result editNumberByDate(@RequestBody OrderSetting orderSetting){
+        //传过来一个 装了orderDate 和number的Jason  用实体类接收
+        orderSettingService.editNumberByDate(orderSetting);
+        //返回修改结果
+        return new Result(true,MessageConstant.ORDERSETTING_SUCCESS);
     }
 }
