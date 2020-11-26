@@ -25,4 +25,6 @@ public interface SetmealService {
     void update(Setmeal setmeal, Integer[] checkgroupIds);
 
     void deleteById(int id)throws MyException;
+
+    List<String> findImgs();
 }

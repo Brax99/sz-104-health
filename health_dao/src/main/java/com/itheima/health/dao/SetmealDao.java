@@ -30,4 +30,6 @@ public interface SetmealDao {
     int findOrderCountBySetmealId(int id);
 
     void deleteById(int id);
+
+    List<String> findImgs();
 }

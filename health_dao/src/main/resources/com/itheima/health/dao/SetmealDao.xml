@@ -48,4 +48,7 @@
     <delete id="deleteById" parameterType="int">
         delete from t_setmeal where id = #{id}
     </delete>
+    <select id="findImgs" resultType="string">
+        select img from t_setmeal
+    </select>
 </mapper>
