@@ -1,0 +1,75 @@
+首先三要素
+数据
+表
+表结构
+
+查什么数据：
+1套餐的信息：
+套餐id ：t_setmeal.id   套餐名字：t_setmeal.name 套餐概述： t_setmeal.remark   套餐适用年龄：t_setmeal.age   
+套餐适用性别：t_setmeal.sex  套餐的图片信息： t_setmeal.img
+2检查组信息：
+检查组id：t_setmeal_checkgroup.checkgroup_id  检查组名字：t_checkgroup.name  检查组概述：t_checkgroup.remark
+3检查项信息
+检查项id：t_checkgroup_checkitem.checkitem_id  检查项名字;checkitem_name
+
+要查那些表：
+t_setmeal 套餐表 
+t_setmeal_checkgroup 套餐和检查组的关联表
+t_checkgroup 检查组表
+t_checkgroup_checkitem 检查组和检查项的关联表
+t_checkitem 检查项表
+
+
+
+ t_setmeal s left join t_setmeal_checkgroup sc on s.id=sc.setmeal_id
+        left join t_checkgroup cg on sc.checkgroup_id=cg.id
+        left join t_checkgroup_checkitem cc on cg.id=cc.checkgroup_id
+        left join t_checkitem i on cc.checkitem_id=i.id
+        where s.id=#{id}
+
+表结构（表与表的关系）是什么     等于也是指向
+t_setmeal.id=t_setmeal_checkgroup.setmeal_id  套餐表的id等于套餐和套餐与检查项关联表的setmeal_id
+t_setmeal_checkgroup.checkgroup_id=t_checkgroup.id  套餐和套餐与检查项关联表的checkgroup_id等于检查组表的checkgroup.id
+t_checkgroup.id=t_checkgroup_checkitem.checkgroup_id 检查组表的id等于检查组和检查项的关联表checkgroup_id
+t_checkgroup_checkitem.checkitem_id=t_checkitem.id  检查组和检查项的关联表中的id等于检查项表中的id
+初步展示
+SELECT 
+s.id,s.name,s.remark,s.age,s.sex,s.img,
+sc.checkgroup_id,cg.name checkgroup_name,cg.remark checkgroup_remark,
+cc.checkitem_id, i.name checkitem_name
+FROM
+t_setmeal s , t_setmeal_checkgroup sc , t_checkgroup cg ,t_checkgroup_checkitem cc,t_checkitem i 
+WHERE 
+s.id=sc.setmeal_id and sc.checkgroup_id=cg.id and  cg.id=cc.checkgroup_id  and cc.checkitem_id=i.id and s.id = 13
+
+优化：
+为什么不用内连接:
+因为可能没有检查组与套餐的关系或者检查项与检查组的关系 
+但是不能因为检查组与套餐的关系和检查项与检查组的关系信息缺失导致套餐不展示  所以不使用内连接
+用什么连接：
+外连接，查询套餐的时候不因为其他条件影响套餐的查询  检查组信息也是  所以用左外连接 
+
+优化后的实现：
+SELECT
+s.id,s.name,s.remark,s.age,s.sex,s.img,
+sc.checkgroup_id,cg.name checkgroup_name,cg.remark checkgroup_remark,
+cc.checkitem_id, i.name checkitem_name
+FROM
+t_setmeal s left join t_setmeal_checkgroup sc on s.id=sc.setmeal_id
+left join t_checkgroup cg on sc.checkgroup_id=cg.id
+left join t_checkgroup_checkitem cc on cg.id=cc.checkgroup_id
+left join t_checkitem i on cc.checkitem_id=i.id
+WHERE 
+s.id=13
+
+总结 
+先列举要查询的三要素
+然后
+SELECT
+要查询的信息（元素）可取别名
+FROM
+要查哪些表  可取别名
+WHERE
+表与表的关联  还有某些特殊条件
+
+最后分析用什么连接
