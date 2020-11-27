@@ -32,4 +32,8 @@ public interface SetmealDao {
     void deleteById(int id);
 
     List<String> findImgs();
+
+    List<Setmeal> findAll();
+
+    Setmeal findDetailById(int id);
 }

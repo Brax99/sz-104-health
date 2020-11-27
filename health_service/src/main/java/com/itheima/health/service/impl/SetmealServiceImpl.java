@@ -104,6 +104,19 @@ public class SetmealServiceImpl implements SetmealService {
 
     @Override
     public List<String> findImgs() {
+        //找图片
         return setmealDao.findImgs();
+    }
+
+    @Override
+    public List<Setmeal> findAll() {
+        //查询所有套餐信息
+        return setmealDao.findAll();
+    }
+
+    @Override
+    public Setmeal findDetailById(int id) {
+        //通过id查询套餐的详情信息（包括里面的检查组和检查项信息）
+        return setmealDao.findDetailById(id);
     }
 }
