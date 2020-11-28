@@ -45,4 +45,11 @@ public class SetmealMobileController {
         //返回查询的结果
         return new Result(true, MessageConstant.QUERY_SETMEAL_SUCCESS,setmeal);
     }
+    @GetMapping("/findById")
+    public Result findById(int id){
+        Setmeal setmeal = setmealService.findById(id);
+        // 页面要显示图片，拼接图片的完整路径
+        setmeal.setImg(QiNiuUtils.DOMAIN+setmeal.getImg());
+        return new Result(true, MessageConstant.QUERY_SETMEAL_SUCCESS,setmeal);
+    }
 }
