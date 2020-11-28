@@ -16,7 +16,7 @@ public class SMSUtils {
 	public static final String VALIDATE_CODE = "SMS_205886906";//发送短信验证码模板编码  模版CODE
 	private static final String SIGN_NAEM = "黑马程序员";// 短信的签名
 	private static final String PARAMETER_NAME="code";
-	private static final String ACCESS_KEY="xxxx"; //你的AccessKey ID
+	private static final String ACCESS_KEY="xxxxx"; //你的AccessKey ID
 	private static final String SECRET_KEY="xxxxx"; //你的AccessKey Secret
 
 	public static void main(String[] args) throws ClientException {
