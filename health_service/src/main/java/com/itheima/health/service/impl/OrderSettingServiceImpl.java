@@ -1,9 +1,10 @@
-package com.itheima.health.service;
+package com.itheima.health.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.itheima.health.Exception.MyException;
 import com.itheima.health.dao.OrderSettingDao;
 import com.itheima.health.pojo.OrderSetting;
+import com.itheima.health.service.OrderSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
