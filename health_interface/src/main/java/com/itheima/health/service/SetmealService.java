@@ -6,6 +6,7 @@ import com.itheima.health.entity.QueryPageBean;
 import com.itheima.health.pojo.Setmeal;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author mao
@@ -31,4 +32,6 @@ public interface SetmealService {
     List<Setmeal> findAll();
 
     Setmeal findDetailById(int id);
+
+    List<Map<String, Object>> findSetmealCount();
 }

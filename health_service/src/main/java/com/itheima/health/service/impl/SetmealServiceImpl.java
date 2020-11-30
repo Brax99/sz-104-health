@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author mao
@@ -118,5 +119,11 @@ public class SetmealServiceImpl implements SetmealService {
     public Setmeal findDetailById(int id) {
         //通过id查询套餐的详情信息（包括里面的检查组和检查项信息）
         return setmealDao.findDetailById(id);
+    }
+
+    @Override
+    public List<Map<String, Object>> findSetmealCount() {
+        //查询套餐统计数据
+        return setmealDao.findSetmealCount();
     }
 }

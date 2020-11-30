@@ -6,6 +6,9 @@ import com.itheima.health.pojo.Member;
 import com.itheima.health.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author mao
  * @version 1.8
@@ -25,5 +28,18 @@ public class MemberServiceImpl implements MemberService {
     //添加会员
     public void add(Member member) {
         memberDao.add(member);
+    }
+
+    //通过月份查询会员数量
+    @Override
+    public List<Integer> getMemberReport(List<String> months) {
+        //创建一个集合用来封装会员数量数据
+        List<Integer> list = new ArrayList<>();
+        //遍历月份集合
+        months.forEach(month->{
+            //拼接上"-31" 查询当当月月底为止的会员总数
+            list.add(memberDao.findMemberCountBeforeDate(month+"-31"));
+        });
+        return list;
     }
 }

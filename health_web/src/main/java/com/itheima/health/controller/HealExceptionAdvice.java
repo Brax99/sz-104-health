@@ -4,6 +4,7 @@ import com.itheima.health.Exception.MyException;
 import com.itheima.health.entity.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -35,6 +36,11 @@ public class HealExceptionAdvice {
     @ExceptionHandler(MyException.class)
     public Result handleMyException(MyException e){
         return new Result(false, e.getMessage());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public Result handleAccessDeniedException(AccessDeniedException e){
+        return new Result(false, "权限不足");
     }
 
     /***
