@@ -77,9 +77,14 @@
 
     <!--热门套餐，查询前5条-->
     <select id="findHotSetmeal" resultType="map">
-        select s.name, count(o.id) setmeal_count ,count(o.id)/(select count(id) from t_order) proportion
-          from t_order o inner join t_setmeal s on s.id = o.setmeal_id
-          group by o.setmeal_id
-          order by setmeal_count desc limit 0,4
+        select s.name,s.remark,t.count setmeal_count, t.count/t1.total proportion from (
+            select setmeal_id,count(1) count from t_order group by setmeal_id
+        ) t, (select count(1) total from t_order) t1, t_setmeal s
+        where t.setmeal_id=s.id order by t.count desc limit 0,4
     </select>
+    <!--在日期范围内查询数据-->
+    <select id="findOrderCountBetweenDate" parameterType="string" resultType="int">
+        select count(1) from t_order where orderDate between #{startDate} and #{endDate}
+    </select>
+
 </mapper>

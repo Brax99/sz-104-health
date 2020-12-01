@@ -40,7 +40,7 @@
                             <td colspan="4" class="headBody">会员数据统计</td>
                         </tr>
                         <tr>
-                            <td width='20%' class="tabletrBg">新增会员数</td>
+                            <td width='20%' class="tabletrBg">本日新增会员数</td>
                             <td width='30%'>{{reportData.todayNewMember}}</td>
                             <td width='20%' class="tabletrBg">总会员数</td>
                             <td width='30%'>{{reportData.totalMember}}</td>
@@ -85,7 +85,7 @@
                             <td>{{s.name}}</td>
                             <td>{{s.setmeal_count}}</td>
                             <td>{{s.proportion}}</td>
-                            <td></td>
+                            <td>{{s.remark}}</td>
                         </tr>
                     </table>
                 </div>
@@ -120,12 +120,16 @@
             },
             created() {
                 axios.get("/report/getBusinessReportData.do").then((res)=>{
-                    this.reportData = res.data.data;
+                    if(res.data.flag){
+                        this.reportData = res.data.data;
+                    }else{
+                        this.$message.error(res.data.message);
+                    }
                 });
             },
             methods:{
                 exportExcel(){
-                    window.location.href = '/report/exportBusinessReport.do';
+                    window.location.href = '/report/exportBusinessReport1.do';
                 }
             }
         })

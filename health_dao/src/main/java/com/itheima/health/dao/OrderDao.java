@@ -2,6 +2,7 @@ package com.itheima.health.dao;
 
 
 import com.itheima.health.pojo.Order;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -32,5 +33,8 @@ public interface OrderDao {
     Integer findOrderCountAfterDate(String date);
     Integer findVisitsCountByDate(String date);
     Integer findVisitsCountAfterDate(String date);
+    //在日期范围内查询数据
+    Integer findOrderCountBetweenDate(@Param("startDate") String startDate, @Param("endDate") String endDate);
     List<Map> findHotSetmeal();
+
 }
