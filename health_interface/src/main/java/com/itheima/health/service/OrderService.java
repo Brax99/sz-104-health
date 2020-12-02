@@ -13,5 +13,5 @@ import java.util.Map;
 public interface OrderService {
     Integer submit(Map<String, String> paraMap, Date orderDate)throws MyException;
 
-    Map<String, String> findOrderDetailById(int id);
+    Map<String, Object> findOrderDetailById(int id);
 }
