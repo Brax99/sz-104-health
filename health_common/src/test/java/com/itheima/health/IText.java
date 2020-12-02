@@ -24,7 +24,7 @@ public class IText {
         PdfWriter.getInstance(doc,new FileOutputStream(new File("d:\\iText.pdf")));
         // 打开文档
         doc.open();
-        doc.add(new Paragraph("Hello World"));
+        doc.add(new Paragraph("Hello ==传智播客啦啦=="));
         // 关闭文档
         doc.close();
     }
@@ -38,10 +38,9 @@ public class IText {
         doc.open();
         // 添加段落
         BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
-        doc.add(new Paragraph("你好，传智播客", new Font(bfChinese)));
+        doc.add(new Paragraph("==你好，传智播客哒哒哒哒！！！==", new Font(bfChinese)));
         //doc.add(new Paragraph("Hello 传智播客"));
         // 关闭文档
         doc.close();
     }
-
 }
